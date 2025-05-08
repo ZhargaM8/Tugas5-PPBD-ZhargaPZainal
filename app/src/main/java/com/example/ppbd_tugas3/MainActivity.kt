@@ -47,8 +47,6 @@ fun AgeCalculatorScreen(modifier: Modifier = Modifier) {
     val indonesianLocale = Locale("in", "ID")
     val dateFormatter = SimpleDateFormat("dd MMMM yyyy", indonesianLocale)
     val jakartaTimeZone = TimeZone.getTimeZone("Asia/Jakarta")
-
-    // Update age every second if birthday is set
     LaunchedEffect(birthday) {
         if (birthday != null) {
             coroutineScope.launch {
@@ -61,7 +59,7 @@ fun AgeCalculatorScreen(modifier: Modifier = Modifier) {
                         val totalDays = TimeUnit.MILLISECONDS.toDays(diffInMillis)
                         val years = totalDays / 365
                         val daysLeft = totalDays % 365
-                        val months = daysLeft / 30.42 // Average days per month
+                        val months = daysLeft / 30.42
                         val remainingDays = daysLeft % 30.42
                         val hours = TimeUnit.MILLISECONDS.toHours(diffInMillis) % 24
                         val minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis) % 60
@@ -77,7 +75,7 @@ fun AgeCalculatorScreen(modifier: Modifier = Modifier) {
                             append(seconds).append(" detik")
                         }
                     }
-                    delay(1000L) // Update every second
+                    delay(1000L)
                 }
             }
         }
